@@ -22,7 +22,7 @@ x_test = x_test.astype('float32')
 x_train /= 255 
 x_test /= 255
 
-y_train = np_utils.to_categorical(y_train)
+y_train = np_utils.to_categorical(y_train) 
 y_test = np_utils.to_categorical(y_test)
 
 num_classes = y_test.shape[1] 
@@ -34,6 +34,7 @@ model.add(Conv2D(20, (5, 5),
                  input_shape = input_shape))
 model.add(Activation("relu"))
 model.add(MaxPooling2D(pool_size = (2, 2) ))
+
 model.add(Conv2D(50, (5, 5),
                  padding = "same"))
 model.add(Activation("relu"))
@@ -48,7 +49,7 @@ model.add(Activation("relu"))
 model.add(Dense(num_classes))
 model.add(Activation("softmax"))
            
-model.compile(loss = 'cat'accuracy'])
+model.compile(optimizer='adam',loss = 'categorical_crossentropy',metrics=['accuracy'])
     
 print(model.summary())
 
@@ -62,11 +63,9 @@ history = model.fit(x_train, y_train,
           validation_data=(x_test, y_test),
           shuffle=True)
 
-model.save("mnist_LeNet.h5")
+model.save("/root/mnist_LeNet.h5")
 
 # Evaluate the performance of our trained model
 scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
-
-#comment
