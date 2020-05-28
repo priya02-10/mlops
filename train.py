@@ -28,6 +28,8 @@ y_test = np_utils.to_categorical(y_test)
 num_classes = y_test.shape[1] 
 num_pixels = x_train.shape[1] * x_train.shape[2]
 
+model = Sequential()
+
 # 2 sets of CRP (Convolution, RELU, Pooling)
 model.add(Conv2D(20, (5, 5),
                  padding = "same", 
